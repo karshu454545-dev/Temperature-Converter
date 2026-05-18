@@ -1,0 +1,89 @@
+const savedDisplay = localStorage.getItem('display');
+    const savedTemp = localStorage.getItem('displayTemp');
+    const savedFrom = localStorage.getItem('selectedFrom');
+    const savedTo = localStorage.getItem('selectedTo');
+
+    if (savedDisplay) document.querySelector('.show-temp').innerHTML = savedDisplay;
+    if (savedFrom) document.querySelector('.from-class').value = savedFrom;
+    if (savedTo) document.querySelector('.to-class').value = savedTo;
+    if (savedTemp) {
+      document.querySelector('.given-temp').value = savedTemp;
+    }
+
+    let from = document.querySelector('.from-class');
+    let to = document.querySelector('.to-class');
+
+    function calculate() {
+      let enteredTemp = document.querySelector('.given-temp').value;
+      storeTemp(enteredTemp);
+      storeFrom(from.value);
+      storeTo(to.value);
+      if (enteredTemp === '') {
+        document.querySelector('.show-temp').innerHTML = `Not entered yet`;
+        return;
+      }
+      if (from.value === to.value && from.value !== "") {
+        let unitSymbol = from.value === 'celsius' ? '° C' : from.value === 'fahrenheit' ? '° F' : 'K';
+        document.querySelector('.show-temp').innerHTML = `${enteredTemp}${unitSymbol} = ${Number(enteredTemp)}${unitSymbol}`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+
+      else if (from.value === 'celsius' && to.value === 'fahrenheit') {
+        let celsiusTemp = Number(enteredTemp);
+        let fahrenheitTemp = celsiusTemp * 9 / 5 + 32;
+        document.querySelector('.show-temp').innerHTML = `${celsiusTemp}° C = ${fahrenheitTemp.toFixed(2)}° F`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+
+      else if (from.value === 'celsius' && to.value === 'kelvin') {
+        let celsiusTemp = Number(enteredTemp);
+        let kelvinTemp = celsiusTemp + 273.15;
+        document.querySelector('.show-temp').innerHTML = `${celsiusTemp}° C = ${kelvinTemp.toFixed(2)}K`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+      else if (from.value === 'fahrenheit' && to.value === 'celsius') {
+        let fahrenheitTemp = Number(enteredTemp);
+        let celsiusTemp = (fahrenheitTemp - 32) * 5 / 9;
+        document.querySelector('.show-temp').innerHTML = `${fahrenheitTemp}° F = ${celsiusTemp.toFixed(2)}° C`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+      else if (from.value === 'fahrenheit' && to.value === 'kelvin') {
+        let fahrenheitTemp = Number(enteredTemp);
+        let kelvinTemp = (fahrenheitTemp - 32) * 5 / 9 + 273.15;
+        document.querySelector('.show-temp').innerHTML = `${fahrenheitTemp}° F = ${kelvinTemp.toFixed(2)}K`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+      else if (from.value === 'kelvin' && to.value === 'celsius') {
+        let kelvinTemp = Number(enteredTemp);
+        let celsiusTemp = kelvinTemp - 273.15;
+        document.querySelector('.show-temp').innerHTML = `${kelvinTemp}K = ${celsiusTemp.toFixed(2)}° C`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+      else if (from.value === 'kelvin' && to.value === 'fahrenheit') {
+        let kelvinTemp = Number(enteredTemp);
+        let fahrenheitTemp = (kelvinTemp - 273.15) * 9 / 5 + 32;
+        document.querySelector('.show-temp').innerHTML = `${kelvinTemp}K = ${fahrenheitTemp.toFixed(2)}° F`;
+        let ui = document.querySelector('.show-temp').innerHTML;
+        store(ui);
+      }
+    }
+
+
+    function store(ui) {
+      localStorage.setItem('display', ui);
+    }
+    function storeTemp(enteredTemp) {
+      localStorage.setItem('displayTemp', enteredTemp);
+    }
+    function storeFrom(fromValue) {
+      localStorage.setItem('selectedFrom', fromValue);
+    }
+    function storeTo(toValue) {
+      localStorage.setItem('selectedTo', toValue);
+    }
