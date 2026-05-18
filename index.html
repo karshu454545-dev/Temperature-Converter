@@ -22,21 +22,26 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+
     }
 
     .inside-container {
-      height: 400px;
-      width: 600px;
+      width: 90%;
+      max-width: 400px;
       background-color: rgba(245, 254, 220, 0.6);
       color: rgb(26, 43, 76);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 20px;
       align-items: center;
-      padding: 30px 20px;
+      padding: 40px 30px;
       text-align: center;
       box-sizing: border-box;
       border-radius: 45px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     .given-temp {
@@ -48,12 +53,14 @@
     }
 
     select {
-      height: 30px;
-      width: 200px;
+      height: 38px;
+      width: 250px;
     }
 
     select,
     input {
+      height: 40px;
+      width: 100%;
       border: 2px solid rgba(26, 43, 76, 0.3);
       border-radius: 4px;
       padding: 6px;
@@ -67,6 +74,18 @@
 
     p {
       font-size: 20px;
+      margin: 10px 0 0 0;
+    }
+
+    .arrow {
+      font-size: 24px;
+      margin: 5px;
+    }
+    .from-class{
+      margin-bottom: 0px;
+    }
+    .to-class{
+      margin-bottom: 30px;
     }
   </style>
 
@@ -76,23 +95,26 @@
   <div class="container">
     <div class="inside-container">
       <h1>Temperature Converter 🌡️❄️☀️</h1>
-      <div>
-        <select name="temperatures" id="temperatureFrom" required class="from-class" onchange="calculate()">
-          <option value="" disabled selected hidden>From Temperature</option>
-          <option value="celsius">Celsius</option>
-          <option value="fahrenheit">Fahrenheit</option>
-          <option value="kelvin">Kelvin</option>
-        </select>
-        ⇄
 
-        <select name="temperatures" id="temperatureTo" required class="to-class" onchange="calculate()">
-          <option value="" disabled selected hidden>To Temperature</option>
-          <option value="celsius">Celsius</option>
-          <option value="fahrenheit">Fahrenheit</option>
-          <option value="kelvin">Kelvin</option>
+      <select name="temperatures" id="temperatureFrom" required class="from-class" onchange="calculate()">
+        <option value="" disabled selected hidden>From Temperature</option>
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+      </select>
+      <span class="arrow">
+        ⬇
+      </span>
 
-        </select>
-      </div>
+
+      <select name="temperatures" id="temperatureTo" required class="to-class" onchange="calculate()">
+        <option value="" disabled selected hidden>To Temperature</option>
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+
+      </select>
+
 
       <input class="given-temp" placeholder="Enter the Temperature here" oninput="calculate();">
       <p class="show-temp"></p>
